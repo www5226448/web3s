@@ -21,43 +21,43 @@ class Parity(Module):
     defaultBlock = "latest"
 
     async def enode(self):
-        return await self.web3.manager.request_blocking(
+        return await self.web3s.manager.request_blocking(
             "parity_enode",
             [],
         )
 
     async def netPeers(self):
-        return await self.web3.manager.request_blocking(
+        return await self.web3s.manager.request_blocking(
             "parity_netPeers",
             [],
         )
 
     async def traceReplayTransaction(self, transaction_hash, mode=['trace']):
-        return await self.web3.manager.request_blocking(
+        return await self.web3s.manager.request_blocking(
             "trace_replayTransaction",
             [transaction_hash, mode],
         )
 
     async def traceReplayBlockTransactions(self, block_identifier, mode=['trace']):
-        return await self.web3.manager.request_blocking(
+        return await self.web3s.manager.request_blocking(
             "trace_replayBlockTransactions",
             [block_identifier, mode]
         )
 
     async def traceBlock(self, block_identifier):
-        return await self.web3.manager.request_blocking(
+        return await self.web3s.manager.request_blocking(
             "trace_block",
             [block_identifier]
         )
 
     async def traceFilter(self, params):
-        return await self.web3.manager.request_blocking(
+        return await self.web3s.manager.request_blocking(
             "trace_filter",
             [params]
         )
 
     async def traceTransaction(self, transaction_hash):
-        return await self.web3.manager.request_blocking(
+        return await self.web3s.manager.request_blocking(
             "trace_transaction",
             [transaction_hash]
         )
@@ -70,7 +70,7 @@ class Parity(Module):
         # TODO: move to middleware
         if block_identifier is None:
             block_identifier = self.defaultBlock
-        return await self.web3.manager.request_blocking(
+        return await self.web3s.manager.request_blocking(
             "trace_call",
             [transaction, [mode], block_identifier],
         )
@@ -80,7 +80,7 @@ class Parity(Module):
         if block_identifier is None:
             block_identifier = self.defaultBlock
 
-        base_url = self.web3.providers[0].endpoint_uri
+        base_url = self.web3s.providers[0].endpoint_uri
 
         txs = [[t, mode] for t in transaction]
 
@@ -96,7 +96,7 @@ class Parity(Module):
         return result['result']
 
     async def traceRawTransaction(self, raw_transaction, mode=['trace']):
-        return await self.web3.manager.request_blocking(
+        return await self.web3s.manager.request_blocking(
             "trace_rawTransaction",
             [raw_transaction, mode],
         )
@@ -106,7 +106,7 @@ class Parity(Module):
         if block_identifier is None:
             block_identifier = self.defaultBlock
 
-        base_url=self.web3.providers[0].endpoint_uri
+        base_url=self.web3s.providers[0].endpoint_uri
 
 
         txs=[[t,mode] for t in transaction]

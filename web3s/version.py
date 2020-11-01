@@ -11,12 +11,12 @@ class Version(Module):
 
     @property
     async def node(self):
-        return await self.web3.manager.request_blocking("web3_clientVersion", [])
+        return await self.web3s.manager.request_blocking("web3_clientVersion", [])
 
     @property
     async def network(self):
-        return await self.web3.manager.request_blocking("net_version", [])
+        return await self.web3s.manager.request_blocking("net_version", [])
 
     @property
     async def ethereum(self):
-        return await self.web3.manager.request_blocking("eth_protocolVersion", [])
+        return await self.web3s.manager.request_blocking("eth_protocolVersion", [])

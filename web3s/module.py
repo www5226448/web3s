@@ -5,6 +5,7 @@ class Module:
     def __init__(self, web3s):
         self.web3s = web3s
 
+
     @classmethod
     def attach(cls, target, module_name=None):
         if not module_name:

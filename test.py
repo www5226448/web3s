@@ -2,8 +2,7 @@ import asyncio
 
 import web3s
 
-w3 = web3s.Web3s(web3s.Web3s.HTTPProvider('https://the-holy-mountain.quiknode.io/8abb50e2-d509-40e5-aa8a-32a62cec92da/CVfNB7IyMQfIH1IqEsTfAJRA6bgFJpIM4y7YlqTiz89dFsMHTpASxKVA1kr58e6-HDfZRZ8J6O9dXTMeVCTOhg==/'))
-
+w3 = web3s.Web3s(web3s.Web3s.HTTPProvider('Your node address'))
 
 
 

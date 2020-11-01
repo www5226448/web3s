@@ -3,4 +3,10 @@ This is a Python library for interacting with Ethereum supporting asynchronous r
 
 If you want to synchronize a method, you can use the sync method in utils to change the asynchronous method to synchronous.
 
+You can use pip to install:
+```shell
+$ pip install web3s
+```
+
+All APIs are consistent with the webpy4.8.0 version. The only difference is that all requests are asynchronous. You can use the sync method in utils to change an asynchronous method to synchronous.
 

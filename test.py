@@ -2,7 +2,7 @@ import asyncio
 
 import web3s
 
-w3 = web3s.Web3s(web3s.Web3s.HTTPProvider('Your node address'))
+w3 = web3s.Web3s(web3s.Web3s.HTTPProvider('Your provider address'))
 
 
 

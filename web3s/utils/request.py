@@ -1,25 +1,62 @@
+import asyncio
+
 from typing import (
-    Any,
+    Any
 )
+
 
 from eth_typing import (
     URI,
 )
-
+import asyncio
 import json
 
-import aiohttp
+import lru
+
+from aiohttp import ClientSession
+from web3.utils.caching import (
+    generate_cache_key,
+)
+
+
+
+
+def cache_session(endpoint_uri: URI, session: ClientSession) -> None:
+    cache_key = generate_cache_key(endpoint_uri)
+    _session_cache[cache_key] = session
+
+async def _remove_session(key: str, session: ClientSession) -> None:
+    await session.close()
+
+def __remove_session(key: str, session: ClientSession) -> None:
+    try:
+        asyncio.ensure_future(remove_session(key, session))
+    except AttributeError:
+        asyncio.create_task(remove_session(key, session))
+
+
+
+_session_cache = lru.LRU(15, callback=__remove_session)
+
+
+def _get_session(endpoint_uri: URI) -> ClientSession:
+    cache_key = generate_cache_key(endpoint_uri)
+    if cache_key not in _session_cache:
+        _session_cache[cache_key] = ClientSession()
+    return _session_cache[cache_key]
+
 
 
 
 
 async def make_post_request(endpoint_uri: URI, data: bytes, *args: Any, **kwargs: Any) -> bytes:
+    session = _get_session(endpoint_uri)
 
-    async with aiohttp.ClientSession(*args,**kwargs) as session:
-        data=json.loads(data)
-        async with session.post(endpoint_uri, json=data) as resp:
-            resp.raise_for_status()
-            response=await resp.read()
 
-            return response
+    data=json.loads(data)
+    resp=await session.post(endpoint_uri, json=data)
+    resp.raise_for_status()
+    response=await resp.read()
+
+    return response
 

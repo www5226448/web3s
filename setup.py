@@ -13,7 +13,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "web3s",
-    version = "4.8.1",
+    version = "4.8.3",
     keywords = ("pip", "web3","ETH",'Ethereum'),
     description = "A Python library for interacting with Ethereum supporting asynchronous requests",
     long_description = "Base on the offical web3,this library supports asynchronous requests",

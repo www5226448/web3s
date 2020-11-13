@@ -29,6 +29,7 @@ async def _remove_session(key: str, session: ClientSession) -> None:
     await session.close()
 
 def __remove_session(key: str, session: ClientSession) -> None:
+    print('remove session')
     try:
         asyncio.ensure_future(remove_session(key, session))
     except AttributeError:
@@ -36,7 +37,7 @@ def __remove_session(key: str, session: ClientSession) -> None:
 
 
 
-_session_cache = lru.LRU(15, callback=__remove_session)
+_session_cache = lru.LRU(9, callback=__remove_session)
 
 
 def _get_session(endpoint_uri: URI) -> ClientSession:
@@ -54,9 +55,9 @@ async def make_post_request(endpoint_uri: URI, data: bytes, *args: Any, **kwargs
 
 
     data=json.loads(data)
-    resp=await session.post(endpoint_uri, json=data)
-    resp.raise_for_status()
-    response=await resp.read()
-
-    return response
-
+    response=await session.post(endpoint_uri, json=data)
+    response.raise_for_status()
+    
+    async with response as resp:
+        result=await resp.read()       
+    return result

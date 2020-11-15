@@ -5,6 +5,7 @@ from eth_utils import (
     apply_to_return_value,
     is_checksum_address,
     is_string,
+    to_checksum_address,
 )
 from hexbytes import (
     HexBytes,
@@ -54,6 +55,7 @@ from web3s.utils.decorators import async_apply_to_return_value
 
 
 
+
 class Eth(Module):
     account = Account()
     defaultAccount = empty
@@ -61,6 +63,7 @@ class Eth(Module):
     defaultContractFactory = Contract
     iban = Iban
     gasPriceStrategy = None
+
 
 
 
@@ -396,12 +399,16 @@ class Eth(Module):
     def contract(self,
                  address=None,
                  **kwargs):
+        address=to_checksum_address(address)
+        if address in self.web3s.contracts.keys():
+            return self.web3s.contracts[address]
 
         ContractFactoryClass = kwargs.pop('ContractFactoryClass', self.defaultContractFactory)
 
         ContractFactory = ContractFactoryClass.factory(self.web3s, **kwargs)
 
         if address:
+            self.web3s.contracts[address]=ContractFactory(address)
             return ContractFactory(address)
         else:
             return ContractFactory

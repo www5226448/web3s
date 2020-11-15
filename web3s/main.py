@@ -105,6 +105,7 @@ class Web3s:
     isChecksumAddress = staticmethod(is_checksum_address)
     toChecksumAddress = staticmethod(to_checksum_address)
 
+
     def __init__(self, providers=empty, middlewares=None, modules=None, ens=empty):
         self.manager = RequestManager(self, providers, middlewares)
 
@@ -115,6 +116,7 @@ class Web3s:
             module_class.attach(self, module_name)
 
         self.ens = ens
+        self.contracts={}
 
     @property
     def middleware_stack(self):

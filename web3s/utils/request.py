@@ -14,7 +14,7 @@ import json
 import lru
 
 from aiohttp import ClientSession
-from web3.utils.caching import (
+from web3s.utils.caching import (
     generate_cache_key,
 )
 
@@ -57,7 +57,8 @@ async def make_post_request(endpoint_uri: URI, data: bytes, *args: Any, **kwargs
     data=json.loads(data)
     response=await session.post(endpoint_uri, json=data)
     response.raise_for_status()
-    
+
     async with response as resp:
-        result=await resp.read()       
+        result=await resp.read()
     return result
+

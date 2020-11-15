@@ -399,7 +399,7 @@ class Eth(Module):
     def contract(self,
                  address=None,
                  **kwargs):
-        address=to_checksum_address(address)
+
         if address in self.web3s.contracts.keys():
             return self.web3s.contracts[address]
 

@@ -8,7 +8,7 @@ from eth_utils import (
     is_hex_address,
 )
 
-from ens import ENS
+from web3s.ens import ENS
 from web3s.exceptions import (
     NameNotFound,
 )

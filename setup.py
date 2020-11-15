@@ -36,7 +36,6 @@ setup(
                         'lru-dict==1.1.6',
                         'eth-utils==1.9.5',
                         'aiohttp==3.6.2',
-	        'ens==0.6.1'
                         ]
 )
 

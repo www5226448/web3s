@@ -10,7 +10,7 @@ from eth_utils import (
     to_wei,
 )
 
-from ens import ENS
+from web3s.ens import ENS
 
 from web3s.admin import Admin
 from web3s.eth import Eth

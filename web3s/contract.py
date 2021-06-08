@@ -240,7 +240,7 @@ class Contract:
             )
 
         if address:
-            self.address = normalize_address(self.web3s.ens, address)
+            self.address = normalize_address( address)
 
         if not self.address:
             raise TypeError("The address argument is required to instantiate a contract.")
@@ -256,7 +256,7 @@ class Contract:
 
         normalizers = {
             'abi': normalize_abi,
-            'address': partial(normalize_address, kwargs['web3s'].ens),
+            'address': normalize_address,
             'bytecode': normalize_bytecode,
             'bytecode_runtime': normalize_bytecode,
         }

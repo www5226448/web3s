@@ -41,7 +41,7 @@ from web3s.utils.function_identifiers import (
 from web3s.utils.normalizers import (
     abi_address_to_hex,
     abi_bytes_to_bytes,
-    abi_ens_resolver,
+
     abi_string_to_text,
 )
 from web3s.utils.toolz import (
@@ -141,7 +141,7 @@ def encode_abi(web3, abi, arguments, data=None):
 
     try:
         normalizers = [
-            abi_ens_resolver(web3),
+
             abi_address_to_hex,
             abi_bytes_to_bytes,
             abi_string_to_text,

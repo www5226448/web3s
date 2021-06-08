@@ -10,7 +10,7 @@ from eth_utils import (
     to_wei,
 )
 
-from web3s.ens import ENS
+
 
 from web3s.admin import Admin
 from web3s.eth import Eth
@@ -55,9 +55,8 @@ from web3s.utils.encoding import (
     to_hex,
     to_text,
 )
-from web3s.utils.normalizers import (
-    abi_ens_resolver,
-)
+
+
 
 from web3s.utils.decorators import async_apply_to_return_value
 
@@ -106,7 +105,7 @@ class Web3s:
     toChecksumAddress = staticmethod(to_checksum_address)
 
 
-    def __init__(self, providers=empty, middlewares=None, modules=None, ens=empty):
+    def __init__(self, providers=empty, middlewares=None, modules=None):
         self.manager = RequestManager(self, providers, middlewares)
 
         if modules is None:
@@ -115,7 +114,7 @@ class Web3s:
         for module_name, module_class in modules.items():
             module_class.attach(self, module_name)
 
-        self.ens = ens
+
         self.contracts={}
 
     @property
@@ -146,31 +145,6 @@ class Web3s:
             )
         )
 
-    @combomethod
-    def soliditySha3(cls, abi_types, values):
-        """
-        Executes sha3 (keccak256) exactly as Solidity does.
-        Takes list of abi_types as inputs -- `[uint24, int8[], bool]`
-        and list of corresponding values  -- `[20, [-1, 5, 0], True]`
-        """
-        if len(abi_types) != len(values):
-            raise ValueError(
-                "Length mismatch between provided abi types and values.  Got "
-                "{0} types and {1} values.".format(len(abi_types), len(values))
-            )
-
-        if isinstance(cls, type):
-            w3 = None
-        else:
-            w3 = cls
-        normalized_values = map_abi_data([abi_ens_resolver(w3)], abi_types, values)
-
-        hex_string = add_0x_prefix(''.join(
-            remove_0x_prefix(hex_encode_abi_type(abi_type, value))
-            for abi_type, value
-            in zip(abi_types, normalized_values)
-        ))
-        return cls.sha3(hexstr=hex_string)
 
     async def isConnected(self):
         for provider in self.providers:
@@ -179,13 +153,4 @@ class Web3s:
         else:
             return False
 
-    @property
-    def ens(self):
-        if self._ens is empty:
-            return ENS.fromWeb3(self)
-        else:
-            return self._ens
 
-    @ens.setter
-    def ens(self, new_ens):
-        self._ens = new_ens

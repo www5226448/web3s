@@ -30,11 +30,10 @@ from web3s.utils.encoding import (
     to_hex,
     to_text,
 )
-from web3s.utils.ens import (
-    StaticENS,
-    is_ens_name,
-    validate_name_has_address,
-)
+
+
+
+
 from web3s.utils.toolz import (
     curry,
 )
@@ -131,28 +130,7 @@ def abi_address_to_hex(abi_type, data):
             return abi_type, to_checksum_address(data)
 
 
-@curry
-def abi_ens_resolver(w3, abi_type, val):
-    if abi_type == 'address' and is_ens_name(val):
-        if w3 is None:
-            raise InvalidAddress(
-                "Could not look up name %r because no web3s"
-                " connection available" % (val)
-            )
-        elif w3.ens is None:
-            raise InvalidAddress(
-                "Could not look up name %r because ENS is"
-                " set to None" % (val)
-            )
-        elif int(w3.net.version) is not 1 and not isinstance(w3.ens, StaticENS):
-            raise InvalidAddress(
-                "Could not look up name %r because web3s is"
-                " not connected to mainnet" % (val)
-            )
-        else:
-            return (abi_type, validate_name_has_address(w3.ens, val))
-    else:
-        return (abi_type, val)
+
 
 
 BASE_RETURN_NORMALIZERS = [
@@ -176,12 +154,9 @@ def normalize_abi(abi):
     return abi
 
 
-def normalize_address(ens, address):
+def normalize_address( address):
     if address:
-        if is_ens_name(address):
-            validate_name_has_address(ens, address)
-        else:
-            validate_address(address)
+        validate_address(address)
     return address
 
 

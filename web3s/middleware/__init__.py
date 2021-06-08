@@ -28,9 +28,8 @@ from .formatting import (  # noqa: F401
 from .gas_price_strategy import (  # noqa: F401
     gas_price_strategy_middleware,
 )
-from .names import (  # noqa: F401
-    name_to_address_middleware,
-)
+
+
 from .normalize_errors import (  # noqa: F401
     normalize_errors_middleware,
 )

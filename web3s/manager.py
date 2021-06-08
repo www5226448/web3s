@@ -16,7 +16,7 @@ from web3s.middleware import (
     abi_middleware,
     attrdict_middleware,
     gas_price_strategy_middleware,
-    name_to_address_middleware,
+
     normalize_errors_middleware,
     pythonic_middleware,
     request_parameter_normalizer,
@@ -64,12 +64,11 @@ class RequestManager:
     def default_middlewares(web3):
         '''
         List the default middlewares for the request manager.
-        Leaving ens unspecified will prevent the middleware from resolving names.
         '''
         return [
             (request_parameter_normalizer, 'request_param_normalizer'),
             (gas_price_strategy_middleware, 'gas_price_strategy'),
-            (name_to_address_middleware(web3), 'name_to_address'),
+
             (attrdict_middleware, 'attrdict'),
             (pythonic_middleware, 'pythonic'),
             (normalize_errors_middleware, 'normalize_errors'),

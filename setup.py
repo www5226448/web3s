@@ -30,7 +30,6 @@ setup(
                         'cytoolz==0.10.1',
                         'eth-hash==0.2.0',
                         'hexbytes==0.2.0',
-                        'websockets==6.0',
                         'eth-account==0.3.0',
                         'requests==2.22.0',
                         'lru-dict==1.1.6',

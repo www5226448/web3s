@@ -6,7 +6,7 @@ import operator
 from eth_account import (
     Account,
 )
-from eth_account.local import (
+from eth_account.signers.local import (
     LocalAccount,
 )
 from eth_keys.datatypes import (

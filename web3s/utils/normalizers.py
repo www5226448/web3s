@@ -7,9 +7,10 @@ import functools
 import json
 
 import eth_abi
-from eth_abi.abi import (
-    process_type,
-)
+
+
+from web3s.utils.abi import process_type
+
 from eth_utils import (
     to_checksum_address,
 )

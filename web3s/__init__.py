@@ -17,7 +17,7 @@ from web3s.providers.tester import (  # noqa: E402
     TestRPCProvider,
 )
 
-__version__ ='4.9.1'
+__version__ ='4.9.5'
 
 __all__ = [
     "__version__",

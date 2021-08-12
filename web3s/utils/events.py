@@ -5,9 +5,10 @@ from eth_abi import (
     decode_single,
     encode_single,
 )
-from eth_abi.abi import (
-    process_type,
-)
+
+
+from web3s.utils.abi import process_type
+
 from eth_utils import (
     encode_hex,
     event_abi_to_log_topic,

@@ -1,6 +1,6 @@
 # web3s
 
-### <span style="color:red">The repository is deprecated, because the official web3 https://github.com/ethereum/web3.py is compatible async now</span>.
+### <span style="color:red">The repository is deprecated, because the official web3 https://github.com/ethereum/web3.py is compatible with async now</span>.
 
 
 This is a Python library for interacting with Ethereum and supporting asynchronous requests.
